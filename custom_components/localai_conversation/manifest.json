@@ -13,7 +13,7 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/spgoodman/localai-ha/issues",
   "requirements": [
-    "openai==0.27.8"
+    "openai==0.28.1"
   ],
-  "version": "v1.0.5"
+  "version": "v1.0.6"
 }
