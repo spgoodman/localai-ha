@@ -36,6 +36,7 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up OpenAI Conversation from a config entry."""
     openai.api_base = entry.data[CONF_API_BASE]
+    openai.api_type = "open_ai"
     openai.api_key = "NoKeyNeeded"
 
     conversation.async_set_agent(hass, entry, OpenAIAgent(hass, entry))
@@ -105,7 +106,7 @@ class OpenAIAgent(conversation.AbstractConversationAgent):
         _LOGGER.debug("Prompt for %s: %s", model, messages)
 
         try:
-            result = await openai.ChatCompletion.create(
+            result = await openai.ChatCompletion.acreate(
                 engine=model,
                 messages=messages,
                 max_tokens=max_tokens,
@@ -117,7 +118,7 @@ class OpenAIAgent(conversation.AbstractConversationAgent):
             intent_response = intent.IntentResponse(language=user_input.language)
             intent_response.async_set_error(
                 intent.IntentResponseErrorCode.UNKNOWN,
-                f"Sorry, I had a problem talking to OpenAI: {err}",
+                f"Sorry, I had a problem talking to LocalAI: {err}",
             )
             return conversation.ConversationResult(
                 response=intent_response, conversation_id=conversation_id
