@@ -12,7 +12,6 @@ from openai import error
 import voluptuous as vol
 
 from homeassistant import config_entries
-from homeassistant.const import CONF_API_KEY
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import (
@@ -33,17 +32,14 @@ from .const import (
     DEFAULT_TEMPERATURE,
     DEFAULT_TOP_P,
     DOMAIN,
-    CONF_API_BASE,
-    CONF_API_VERSION,
+    CONF_API_BASE
 )
 
 _LOGGER = logging.getLogger(__name__)
 
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_API_KEY): str,
-        vol.Required(CONF_API_BASE): str,
-        vol.Required(CONF_API_VERSION): str,
+        vol.Required(CONF_API_BASE): str
     }
 )
 
@@ -63,11 +59,10 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> None:
 
     Data has the keys from STEP_USER_DATA_SCHEMA with values provided by the user.
     """
-    openai.api_key = data[CONF_API_KEY]
     openai.api_base = data[CONF_API_BASE]
-    openai.api_version = data[CONF_API_VERSION]
+    openai.api_key = "NoKeyNeeded"
 
-    await hass.async_add_executor_job(partial(openai.Model.list, request_timeout=10))
+    
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):

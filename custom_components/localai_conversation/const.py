@@ -34,4 +34,3 @@ DEFAULT_TEMPERATURE = 0.5
 
 # Custom configuration entries
 CONF_API_BASE = "api_base"
-CONF_API_VERSION = "api_version"
