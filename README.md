@@ -35,9 +35,8 @@ conversation:
 2. Download and install the integration from HACS: [LocalAI Conversation](https://my.home-assistant.io/redirect/hacs_repository/?owner=spgoodman&repository=localai-ha&category=integration)
 3. Restart your Home Assistant instance
 4. Go to [Settings -> Devices & Services -> Add Integration -> LocalAI Conversation](https://my.home-assistant.io/redirect/config_flow_start/?domain=localai_conversation)
-5. Type your `API Base` similar the example below and hit submit, and for `API Key` enter any value:
+5. Type your `API Base` similar the example below and hit submit:
 > - API Base: http://localhost:8080/ 
-> - API Key: MyFakeAPIKey
 
 #  Options
 
