@@ -35,4 +35,6 @@ DEFAULT_TEMPERATURE = 0.7
 
 # Custom configuration entries
 CONF_API_BASE = "api_base"
+CONF_API_KEY = "api_key"
+DEFAULT_API_KEY = "No-Key-Required-For-LocalAI"
 DEFAULT_API_BASE = "http://localhost:8080"

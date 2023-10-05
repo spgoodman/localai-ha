@@ -27,7 +27,8 @@ from .const import (
     DEFAULT_PROMPT,
     DEFAULT_TEMPERATURE,
     DEFAULT_TOP_P,
-    CONF_API_BASE
+    CONF_API_BASE,
+    CONF_API_KEY
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -35,7 +36,7 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up LocalAI Conversation from a config entry."""
-    openai.api_key = "NoAPIKey"
+    openai.api_key = entry.data[CONF_API_KEY]
     openai.api_base = entry.data[CONF_API_BASE]
 
     try:
