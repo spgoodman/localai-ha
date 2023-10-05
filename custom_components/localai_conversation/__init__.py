@@ -28,23 +28,24 @@ from .const import (
     DEFAULT_TEMPERATURE,
     DEFAULT_TOP_P,
     CONF_API_BASE,
-    CONF_API_KEY
+    CONF_API_VERSION,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up LocalAI Conversation from a config entry."""
+    """Set up OpenAI Conversation from a config entry."""
     openai.api_key = entry.data[CONF_API_KEY]
     openai.api_base = entry.data[CONF_API_BASE]
+    openai.api_version = entry.data[CONF_API_VERSION]
 
     try:
         await hass.async_add_executor_job(
             partial(openai.Model.list, request_timeout=10)
         )
     except error.AuthenticationError as err:
-        _LOGGER.error("Invalid API key - is this a LocalAI instance?: %s", err)
+        _LOGGER.error("Invalid API key: %s", err)
         return False
     except error.OpenAIError as err:
         raise ConfigEntryNotReady(err) from err
@@ -74,7 +75,7 @@ class OpenAIAgent(conversation.AbstractConversationAgent):
         """Return the attribution."""
         return {
             "name": "Powered by LocalAI",
-            "url": "https://localai.io/",
+            "url": "https://azure.microsoft.com/products/cognitive-services/openai-service",
         }
 
     @property
@@ -128,7 +129,7 @@ class OpenAIAgent(conversation.AbstractConversationAgent):
             intent_response = intent.IntentResponse(language=user_input.language)
             intent_response.async_set_error(
                 intent.IntentResponseErrorCode.UNKNOWN,
-                f"Sorry, I had a problem talking to your LocalAI instance: {err}",
+                f"Sorry, I had a problem talking to OpenAI: {err}",
             )
             return conversation.ConversationResult(
                 response=intent_response, conversation_id=conversation_id

@@ -1,13 +1,19 @@
 {
-  "domain": "LocalAI_conversation",
+  "domain": "localai_conversation",
   "name": "LocalAI Conversation",
-  "codeowners": ["@spgoodman"],
+  "codeowners": [
+    "@spgoodman"
+  ],
   "config_flow": true,
-  "dependencies": ["conversation"],
+  "dependencies": [
+    "conversation"
+  ],
   "documentation": "https://github.com/spgoodman/localai-ha",
   "integration_type": "service",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/joselcaguilar/azure-openai-ha/issues",
-  "requirements": ["openai==0.27.8"],
-  "version": "v0.0.0"
+  "issue_tracker": "https://github.com/spgoodman/localai-ha/issues",
+  "requirements": [
+    "openai==0.27.8"
+  ],
+  "version": "v1.0.3"
 }

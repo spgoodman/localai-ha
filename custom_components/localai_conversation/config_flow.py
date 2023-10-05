@@ -12,6 +12,7 @@ from openai import error
 import voluptuous as vol
 
 from homeassistant import config_entries
+from homeassistant.const import CONF_API_KEY
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.selector import (
@@ -33,21 +34,21 @@ from .const import (
     DEFAULT_TOP_P,
     DOMAIN,
     CONF_API_BASE,
-    CONF_API_KEY,
-    DEFAULT_API_KEY
+    CONF_API_VERSION,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_API_KEY): str
+        vol.Required(CONF_API_KEY): str,
+        vol.Required(CONF_API_BASE): str,
+        vol.Required(CONF_API_VERSION): str,
     }
 )
 
 DEFAULT_OPTIONS = types.MappingProxyType(
     {
-        CONF_API_KEY: DEFAULT_API_KEY,
         CONF_PROMPT: DEFAULT_PROMPT,
         CONF_CHAT_MODEL: DEFAULT_CHAT_MODEL,
         CONF_MAX_TOKENS: DEFAULT_MAX_TOKENS,
@@ -64,7 +65,8 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> None:
     """
     openai.api_key = data[CONF_API_KEY]
     openai.api_base = data[CONF_API_BASE]
- 
+    openai.api_version = data[CONF_API_VERSION]
+
     await hass.async_add_executor_job(partial(openai.Model.list, request_timeout=10))
 
 

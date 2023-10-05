@@ -28,13 +28,10 @@ DEFAULT_CHAT_MODEL = "luna-ai-llama2"
 CONF_MAX_TOKENS = "max_tokens"
 DEFAULT_MAX_TOKENS = 150
 CONF_TOP_P = "top_p"
-DEFAULT_TOP_P = 0.9
+DEFAULT_TOP_P = 1
 CONF_TEMPERATURE = "temperature"
-DEFAULT_TEMPERATURE = 0.7
-
+DEFAULT_TEMPERATURE = 0.5
 
 # Custom configuration entries
 CONF_API_BASE = "api_base"
-CONF_API_KEY = "api_key"
-DEFAULT_API_KEY = "No-Key-Required-For-LocalAI"
-DEFAULT_API_BASE = "http://localhost:8080"
+CONF_API_VERSION = "api_version"
