@@ -11,7 +11,7 @@
     "step": {
       "user": {
         "data": {
-          "api_base": "API Base URL for your LocalAI instance",
+          "api_base": "API Base URL for your LocalAI instance"
         }
       }
     }
