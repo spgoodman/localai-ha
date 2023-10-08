@@ -22,11 +22,13 @@ from .const import (
     CONF_PROMPT,
     CONF_TEMPERATURE,
     CONF_TOP_P,
+    CONF_STOP_MESSAGE,
     DEFAULT_CHAT_MODEL,
     DEFAULT_MAX_TOKENS,
     DEFAULT_PROMPT,
     DEFAULT_TEMPERATURE,
     DEFAULT_TOP_P,
+    DEFAULT_STOP_MESSAGE,
     CONF_API_BASE
 )
 
@@ -81,6 +83,7 @@ class OpenAIAgent(conversation.AbstractConversationAgent):
         max_tokens = self.entry.options.get(CONF_MAX_TOKENS, DEFAULT_MAX_TOKENS)
         top_p = self.entry.options.get(CONF_TOP_P, DEFAULT_TOP_P)
         temperature = self.entry.options.get(CONF_TEMPERATURE, DEFAULT_TEMPERATURE)
+        stop_message = self.entry.options.get(CONF_STOP_MESSAGE, DEFAULT_STOP_MESSAGE)
 
         if user_input.conversation_id in self.history:
             conversation_id = user_input.conversation_id
@@ -113,6 +116,7 @@ class OpenAIAgent(conversation.AbstractConversationAgent):
                 top_p=top_p,
                 temperature=temperature,
                 user=conversation_id,
+                stop=stop_message,
             )
         except error.OpenAIError as err:
             intent_response = intent.IntentResponse(language=user_input.language)

@@ -26,11 +26,13 @@ from .const import (
     CONF_PROMPT,
     CONF_TEMPERATURE,
     CONF_TOP_P,
+    CONF_STOP_MESSAGE,
     DEFAULT_CHAT_MODEL,
     DEFAULT_MAX_TOKENS,
     DEFAULT_PROMPT,
     DEFAULT_TEMPERATURE,
     DEFAULT_TOP_P,
+    DEFAULT_STOP_MESSAGE,
     DOMAIN,
     CONF_API_BASE
 )
@@ -50,6 +52,7 @@ DEFAULT_OPTIONS = types.MappingProxyType(
         CONF_MAX_TOKENS: DEFAULT_MAX_TOKENS,
         CONF_TOP_P: DEFAULT_TOP_P,
         CONF_TEMPERATURE: DEFAULT_TEMPERATURE,
+        CONF_STOP_MESSAGE: DEFAULT_STOP_MESSAGE,
     }
 )
 
@@ -163,4 +166,9 @@ def openai_config_option_schema(options: MappingProxyType[str, Any]) -> dict:
             description={"suggested_value": options[CONF_TEMPERATURE]},
             default=DEFAULT_TEMPERATURE,
         ): NumberSelector(NumberSelectorConfig(min=0, max=1, step=0.05)),
+        vol.Optional(
+            CONF_STOP_MESSAGE,
+            description={"suggested_value": options[CONF_STOP_MESSAGE]},
+            default=DEFAULT_STOP_MESSAGE,
+        ): str,
     }
